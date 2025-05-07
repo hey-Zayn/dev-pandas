@@ -1,6 +1,6 @@
 "use client";
 
-import React, {  useLayoutEffect, useRef } from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 
@@ -13,36 +13,35 @@ const Section2 = () => {
   const wrapperRef = useRef(null);
   const about_bottom_height = useRef(80);
   const about_top_height = useRef(-50);
-  const Start = useRef("top bottom-=190");
+  const Start = useRef("top bottom");
 
-   useLayoutEffect(() => {
-      requestAnimationFrame(() => {
-        const elements = gsap.utils.toArray(".tex_animation");
-  
-        elements.forEach((el) => {
-          gsap.fromTo(
-            el,
-            { opacity: 0, y: 50 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 1,
-              scrollTrigger: {
-                trigger: el,
-                start: "top 85%",
-                toggleActions: "play none none reverse",
-              },
-            }
-          );
-        });
-        ScrollTrigger.refresh();
+  useLayoutEffect(() => {
+    requestAnimationFrame(() => {
+      const elements = gsap.utils.toArray(".tex_animation");
+
+      elements.forEach((el) => {
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            scrollTrigger: {
+              trigger: el,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
       });
-  
-      // Clean up scroll triggers when component unmounts
-      return () => {
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      };
-    }, []);
+      ScrollTrigger.refresh();
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
 
   useLayoutEffect(() => {
     const winwidth = window.innerWidth;
@@ -50,7 +49,7 @@ const Section2 = () => {
     if (winwidth < 786) {
       about_bottom_height.current = 600;
       about_top_height.current = -240;
-      Start.current = "top bottom-=250";
+      Start.current = "top bottom";
     }
 
     requestAnimationFrame(() => {
@@ -61,7 +60,8 @@ const Section2 = () => {
           end: "bottom center",
           scrub: true,
           pinSpacing: false,
-          markers: true
+          markers: true,
+          invalidateOnRefresh: true
         },
       });
 
