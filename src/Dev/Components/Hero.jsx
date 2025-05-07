@@ -1,32 +1,30 @@
 "use client";
 
-import React, { useLayoutEffect } from "react";
+import React, { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
-  useLayoutEffect(() => {
-    requestAnimationFrame(() => {
-      const elements = gsap.utils.toArray(".animation");
+  useEffect(() => {
+    const elements = gsap.utils.toArray(".animation");
 
-      elements.forEach((el) => {
-        gsap.fromTo(
-          el,
-          { opacity: 0, y: 50 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            scrollTrigger: {
-              trigger: el,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      });
+    elements.forEach((el) => {
+      gsap.fromTo(
+        el,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
     });
 
     // Clean up scroll triggers when component unmounts
@@ -37,26 +35,6 @@ const Hero = () => {
 
   return (
     <div className="relative w-full bg-black max-sm:h-[80vh] max-sm:pt-10 md:pt-10 max-sm:pb-[50%]">
-      {/* 
-      <div className="fixed inset-0 z-15">
-        <Canvas
-          camera={{ position: [0, 0, 10] }}
-          frameloop="demand"
-          dpr={[1, 1.5]}
-          gl={{ powerPreference: "high-performance", antialias: false }}
-        >
-          <PerformanceMonitor onDecline={() => {}} />
-          <Suspense fallback={null}>
-            <Galaxy count={1000} radius={10} />
-          </Suspense>
-        </Canvas>
-      </div> 
-      */}
-
-      {/* <div className="text-center max-sm:text-2xl max-sm:mt-5 text-3xl font-extrabold">
-        Your Vision - Our Mission
-      </div> */}
-
       <div className="flex flex-col md:gap-[30%] md:flex-row items-center justify-center gap-10 px-4 py-12 md:py-24 animation">
         <div className="text-5xl md:text-7xl lg:text-8xl font-medium text-white text-center md:text-left">
           Mutual
